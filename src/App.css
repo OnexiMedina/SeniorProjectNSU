@@ -1,45 +1,104 @@
 .App {
   text-align: center;
+  max-width: 400px;
+  --color-primary: #ffffff;
+  --color-secondary: #27478A;
+  --color-secondary-dark: #142549;
+  --color-error: #cc3333;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.whole-app{
+  align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
+/* @media (prefers-reduced-motion: no-preference) {
+ .image-wrapper{
     animation: App-logo-spin infinite 20s linear;
   }
+} */
+
+.image-wrapper{
+  align-items: center;
+  justify-self: center;
+  height: auto;
+  scale: 70%;
+  max-width: 100%;
+  margin: -5px;
 }
 
 
-.scheduler-title-container {
-      width: 80%;
-      display: inline-block;
-      text-align: center;
-      font-weight: 500;
+
+.logoutLink {
+  margin-block: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: 'Roboto', sans-serif;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  align-self: center;
 }
+
+.free-time-button{
+  padding: 5px;
+  background-color: var(--color-secondary);
+  width:200px;
+  max-width: max-content;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--color-secondary);
+  border-radius: var(--border-radius);
+  border-color:#142549;
+  
+
+  /* width:100%;
+    padding: 1rem 2rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--color-primary);
+    border: none;
+    border-radius: var(--border-radius);
+    outline: none;
+    cursor: pointer;
+    background: var(--color-secondary); */
+
+}
+
+.free-time-button:hover{
+  background: var(--color-secondary-dark);
+}
+
+.free-time-button:active{
+  transform: scale(0.98);
+}
+
 
 .treeview-title-container {
-  width: 20%;
-  display: inline-block;
+  width: 100%;
+  max-width: 400px;
   text-align: center;
-  font-weight: 800;
+  font-weight: 700;
   color: #1243a3;
   text-decoration-color: #1243a3;
 }
 
 .scheduler-component {
-  float: left;
-  width: 80%;
+  float: center;
+  margin-top: 5px;
+  width: 100%;
 }
 
 .treeview-component {
-  border: 10px;
-  border-color: black;
-  float: right;
-  width: 20%;
+  width: 100%;
+  max-width: 400px;
+  float: center;
+  text-align: center;
+}
+
+.inner-treeview-component{
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
 }
 
 

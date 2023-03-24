@@ -83,8 +83,7 @@ class App extends React.Component {
   
   render() {
     return (
-      <div>
-      <div className='scheduler-title-container'></div>
+      <div className='whole-app'>
       <div className='scheduler-component'>
       <ScheduleComponent currentView='Month' ref={schedule => this.scheduleObj = schedule as ScheduleComponent}
       eventSettings={{dataSource: this.localData}} selectedDate={new Date(2023, 2, 20)} > 
@@ -94,7 +93,7 @@ class App extends React.Component {
 
       <div className='treeview-title-container'>Pending Assignments</div>
       <div className='treeview-component'>
-        <TreeViewComponent fields ={this.field} allowDragAndDrop={true}
+        <TreeViewComponent className='inner-treeview-component' fields ={this.field} allowDragAndDrop={true}
         nodeDragStop={this.onTreeDragStop.bind(this)} />
       </div>
       </div>
