@@ -34,7 +34,7 @@ class App extends React.Component {
       Id: 2,
       EndTime: new Date(2023, 2, 21, 6, 30),
       StartTime: new Date(2023, 2, 21, 4, 0),
-      Subject:'Mexican James',
+      Subject:'Testing James',
       IsAllDay: false,
       ReccurrenceRule: 'FREQ=DAILY,INTERVAL=1,COUNT=10',
       Location: 'Norfolk State University'
@@ -44,11 +44,11 @@ class App extends React.Component {
 
   private treeViewData: {[key: string]: Object}[] = [
 
-      {Id: 1, Title: 'James Mitre Work'},
-      {Id: 2, Title: 'Guy Algorithm HW'},
-      {Id: 3, Title: 'Twish Research Task'},
-      {Id: 4, Title: 'Cam Music Session'},
-      {Id: 5, Title: 'Dr. A Project'}
+      {Id: 1, Title: 'Senior Project Work'},
+      {Id: 2, Title: 'CyberSecurity Homework'},
+      {Id: 3, Title: 'Research Tasks'},
+      {Id: 4, Title: 'Zoom Meeting'},
+      {Id: 5, Title: 'Software Engineering Project'}
   ];
 
   public field: Object = {dataSource: this.treeViewData, id:'Id', text: 'Title'}
