@@ -232,11 +232,11 @@ class App extends React.Component<{}, AppState> {
         event: {
           StartTime: new Date(),
           EndTime: new Date(new Date().setHours(new Date().getHours() + 1)),
-          IsBlock: true,
         },
       },
       'Add'
     );
+    //this.localData.push(event);
   };
 
   
@@ -306,7 +306,8 @@ class App extends React.Component<{}, AppState> {
           this.localData.push(event);
         }); */
 
-
+        
+    
     
     
   
@@ -333,7 +334,7 @@ class App extends React.Component<{}, AppState> {
 
   
     // Refresh the calendar
-    this.scheduleObj.refresh();
+    //this.scheduleObj.refresh();
   }
   
   

@@ -69,9 +69,7 @@
 
             <button class="form__button" type="submit">Continue</button>
 
-            <p class="form__text">
-                <a href="#" class="form__link">Forgot your password?</a>
-            </p>
+            
 
             <p class="form__text">
                 <a class="form__link" href="signup.php" id="linkCreateAccount">Don't have an account? Create an account</a>

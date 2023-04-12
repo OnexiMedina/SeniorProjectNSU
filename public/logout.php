@@ -7,7 +7,7 @@
       
       echo 'You have Logged out!';
       header('Refresh: 1; URL = http://localhost/MAKE%20MY%20DAY/scheduler-component/public/login.php');
-      session_destroy();
+      //session_destroy();
   }
    
 ?>
