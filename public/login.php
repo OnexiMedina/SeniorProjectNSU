@@ -43,7 +43,7 @@
     <meta charset="utf-8">
     <title>Login Form</title>
     <link rel="shortcut icon" href="/assets/favicon.ico">
-    <link rel="stylesheet" href="./styleForms2.css">
+    <link rel="stylesheet" href="./styleForms.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -51,9 +51,8 @@
 </head>
 
 <body>
-    <div class="logo"><img src="./MMD LOGO.png"  alt="Make My Day Logo"> </div>
     <div class="container">
-
+        <div class="logo"><img src="./MMD LOGO.png"  alt="Make My Day Logo"> </div>
         <form method="post" class="form " id="login">
             <h1 class="form__title">Login</h1>
             <div class="form__message form__message--error"></div>

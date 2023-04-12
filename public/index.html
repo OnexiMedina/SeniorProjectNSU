@@ -27,8 +27,9 @@
     <title>React App</title>
     <div style="text-align: center" class="image-wrapper"><img class="logo" src="./MMD LOGO.png"  alt="Make My Day"> </div>
     <div class="group-buttons"style="text-align: center">
-      <button type="submit" class="free-time-button">Free Time</button>
-      <button type="submit" class="free-time-button">Add Event</button>
+      <button type="submit" class="add-event-button" id="add-event-btn">Add Event</button>
+      <button type="submit" class="add-task-button" id="add-task-btn">Add Task</button>
+      <button type="submit" class="organize-tasks-button" id="organize-tasks-btn">Organize tasks</button>
     </div>
   </head>
   <body>
@@ -43,5 +44,9 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
-  <footer><a style="text-align: center" class="logoutLink" href="http://localhost/MAKE MY DAY/scheduler-component/public/logout.php?logout" >Log out</a></footer>
+  <footer>
+    <button class = logoutLink-button>
+      <a style="text-align: center" class="logoutLink" href="http://localhost/MAKE MY DAY/scheduler-component/public/logout.php?logout" >Log out</a>
+    </button>
+  </footer>
 </html>
