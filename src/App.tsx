@@ -29,6 +29,10 @@ import { DateTimePickerComponent } from "@syncfusion/ej2-react-calendars";
 
 import { isJSDocReadonlyTag } from "typescript";
 
+// LOOK AT THIS!!!
+import helper from "./support/helper"
+let varfoo = helper.greet("i imported my helper class with method")
+
 // Registering Syncfusion license key
 registerLicense(
   "Mgo+DSMBaFt/QHRqVVhkVFpAaV5LQmFJfFBmRGlad1R1ckU3HVdTRHRcQl5hSX5SdU1mXnpdeHM=;Mgo+DSMBPh8sVXJ0S0J+XE9AflRGQmJAYVF2R2BJflRzfF9DZkwgOX1dQl9gSX1RdkViWndbd3FQRWc=;ORg4AjUWIQA/Gnt2VVhkQlFacldJWXxId0x0RWFab196d11MZVpBNQtUQF1hSn5QdEVjWHxWdXNQQGhb;MTM3NTE4MkAzMjMwMmUzNDJlMzBvTUVUMWwwN051Tlo0cUhQY1NMVG14bUY5b3ljODBMRFBYc2d1QW5QSmN3PQ==;MTM3NTE4M0AzMjMwMmUzNDJlMzBHOGFtb09tTzFTdmpUZ3U0RW5KakVwMWhNVVNkbERXYmVESkRpVzVJZGJvPQ==;NRAiBiAaIQQuGjN/V0Z+WE9EaFtKVmdWf1ppR2NbfE5xflZOallXVAciSV9jS31TdUdjWX5deHFSQGJVVg==;MTM3NTE4NUAzMjMwMmUzNDJlMzBGQTVRVmc4eENSakYrbi9ONlNtTDFNd0ZKOHBSQ2t5Si9rdHI3bjlsL0JNPQ==;MTM3NTE4NkAzMjMwMmUzNDJlMzBIQ3dsNUhqMVVHbHVIRmVEZ1JwWGRuOVlwZUZtYUlUbkZLaDhHT0VQRTVrPQ==;Mgo+DSMBMAY9C3t2VVhkQlFacldJWXxId0x0RWFab196d11MZVpBNQtUQF1hSn5QdEVjWHxWdXNSRmBb;MTM3NTE4OEAzMjMwMmUzNDJlMzBXSDc1ZW9BMnpwT0NveDhxVzdPMDhWKzlTMFRYNy9CUnl4QnYwM2F5ZkN3PQ==;MTM3NTE4OUAzMjMwMmUzNDJlMzBiT0F0VVh4K0RsdDFUZFAyL1hlamVOZ0dIcis4RW00eVBBa21wcXBYTURZPQ==;MTM3NTE5MEAzMjMwMmUzNDJlMzBGQTVRVmc4eENSakYrbi9ONlNtTDFNd0ZKOHBSQ2t5Si9rdHI3bjlsL0JNPQ=="
@@ -69,46 +73,7 @@ class App extends React.Component<{}, AppState> {
     }
   }
 
-  organizeTasks(tasks: { [key: string]: any }[]) {
-    const HIGH_PRIORITY = 3;
-    const MEDIUM_PRIORITY = 2;
-    const LOW_PRIORITY = 1;
-    return tasks.sort((a, b) => {
-      const aDueDate = new Date(a.due_date);
-      const bDueDate = new Date(b.due_date);
-      const aPriority =
-        a.priority_level === "Highly Important"
-          ? HIGH_PRIORITY
-          : a.priority_level === "Important"
-          ? MEDIUM_PRIORITY
-          : a.priority_level === "Regular"
-          ? LOW_PRIORITY
-          : 0;
-      const bPriority =
-        b.priority_level === "Highly Important"
-          ? HIGH_PRIORITY
-          : b.priority_level === "Important"
-          ? MEDIUM_PRIORITY
-          : b.priority_level === "Regular"
-          ? LOW_PRIORITY
-          : 0;
-      if (aPriority > bPriority) {
-        return -1;
-      }
-      if (aPriority < bPriority) {
-        return 1;
-      }
-      if (aDueDate < bDueDate) {
-        return -1;
-      }
-      if (aDueDate > bDueDate) {
-        return 1;
-      }
-      return 0;
-    });
-  }
-
-  private localData = [
+  public localData = [
     {
       Id: 1,
       Subject: "Senior Seminar Course",
@@ -190,16 +155,28 @@ class App extends React.Component<{}, AppState> {
     text: "Title",
   };
 
+  //PUBLIC DATE VARIABLES SO EACH TASK HAS DIFFERENT DATE
+  public startCounter = 0;
+  public endCounter = 1;
+  public newStart = new Date();
+  public newEnd = new Date();
+
   handleAddTaskClick = () => {
     const newTaskId = this.state.pendingTasksData.length + 1;
 
     const eventData = {
       Id: newTaskId,
       Subject: "",
-      StartTime: new Date(),
-      EndTime: new Date(new Date().setHours(new Date().getHours() + 1)),
+      StartTime: this.newStart.setHours(new Date().getHours() + this.startCounter), //new Date(),
+      EndTime: this.newEnd.setHours(new Date().getHours() + this.endCounter),
       Importance: "",
     };
+
+    this.newStart = new Date(new Date().setHours(new Date().getHours() + this.startCounter));
+    this.newEnd = new Date(new Date().setHours(new Date().getHours() + this.endCounter));
+
+    this.startCounter++;
+    this.endCounter++; 
 
     this.scheduleObj.openEditor(eventData, "Add", true);
 
@@ -210,7 +187,11 @@ class App extends React.Component<{}, AppState> {
           Id: newTaskId,
           Title: args.data[0].Subject,
           Importance: args.data[0].Importance,
-          //recurrenceRule: args.data[0].RecurrenceRule //TEST
+          StartTime: args.data[0].StartTime,
+          EndTime: args.data[0].EndTime,
+          Location: args.data[0].Location,
+          Description: args.data[0].Description,
+          RecurrenceRule: args.data[0].RecurrenceRule //TEST
         };
 
         this.setState((prevState) => ({
@@ -243,8 +224,8 @@ class App extends React.Component<{}, AppState> {
 
   handleOrganizeTasksClick = () => {
     // Order tasks by importance
-    let orderedTasks = this.state.pendingTasksData
-      .slice()
+    //let orderedTasks = this.state.pendingTasksData
+      /* .slice()
       .sort((a: any, b: any) => {
         let HIGH_PRIORITY = 3;
         let MEDIUM_PRIORITY = 2;
@@ -268,86 +249,189 @@ class App extends React.Component<{}, AppState> {
             : 0;
 
         return bPriority - aPriority;
+      }); */
+
+    // Step 2: Sort tasks based on their importance
+    let sortedTasks = this.state.pendingTasksData;
+    //let tempTaskArray = sorting(sortedTasks);
+    
+
+   
+      let A_importance = 0;
+      let B_importance = 0;
+
+    sortedTasks.forEach((task: any) => {
+
+          for (let i = 0; i <= sortedTasks.length - 2; i++) {
+
+            if (task.Importance === "Highly Important") {
+              A_importance = 4;
+            }
+            else if (task.Importance === "Important") {
+              A_importance = 3;
+            }
+            else if (task.Importance === "Regular") {
+              A_importance = 2;
+            }
+            else {
+              A_importance = 1;
+            }
+
+            console.log ("Value for A_Importance pass at [" + i + "] is " + A_importance + " and variable holds: " + JSON.stringify(task.Importance));
+      
+            if (task.Importance === "Highly Important") {
+              B_importance = 4;
+            }
+            else if (task.Importance === "Important") {
+              B_importance = 3;
+            }
+            else if (task.Importance === "Regular") {
+              B_importance = 2;
+            }
+            else {
+              B_importance = 1;
+            }
+
+            console.log ("Value for B_Importance pass at [" + i + "] is " + B_importance + " and variable holds: " + sortedTasks[i + 1].Importance);
+              
+            if (A_importance < B_importance){
+          
+              //Temp variables to hold start and end times of current task
+              let tempStartTime = sortedTasks[i].StartTime;
+              let tempEndTime = sortedTasks[i].EndTime;
+
+              //Swap start time and end time of current task and task in next index
+              sortedTasks[i].StartTime = sortedTasks[i + 1].StartTime;
+              sortedTasks[i].EndTime = sortedTasks[i + 1].EndTime;
+
+              //Swap start time and end time of TASK IN NEXT Index with CURRENT
+              sortedTasks[i + 1].StartTime = tempStartTime;
+              sortedTasks[i + 1].EndTime = tempEndTime;
+
+              /* //SWAP INDEXES WITH CURRENT AND NEXT INDEX
+              let tempTask = a[i];
+
+              a[i] = a[i + 1];
+
+              a[i + 1] = tempTask; */
+            }
+          }
       });
 
-    /* orderedTasks.forEach((task: any) => {
+    /* function checkIfSorted(a: any): boolean {
 
-          const event = {
-            Id: this.localData.length + 1,
-            Subject: task.Title,
-            StartTime: new Date(),
-            EndTime: new Date(new Date().setHours(new Date().getHours() + 1)),
-            IsAllDay: false,
-            Importance: task.importance,
-          };
+      let A_importance = 0;
+      let B_importance = 0;
 
-          let eventStartTime = new Date(task.StartTime).setHours(task.StartTime.getHours());
-          let cellDetails = this.scheduleObj.getCellDetails(task.StartTime);
+      for (let i = 0; i < a.length - 2; i++) {
+
+
+
+        //ASSIGN IMPORTANCE VALUE
+        if (a[i].Importance === "Highly Important") {
+          A_importance = 4;
+        }
+        else if (a[i].Importance === "Important") {
+          A_importance = 3;
+        }
+        else if (a[i].Importance === "Regular") {
+          A_importance = 2;
+        }
+        else {
+          A_importance = 1;
+        }
   
-          while (!cellDetails || cellDetails && ((event) => new Date(event.startTime).setHours(event.startTime.getHours()) === eventStartTime)(cellDetails)) {
-            eventStartTime += 60 * 60 * 1000; // Increase by 1 hour
-            task.StartTime = new Date(eventStartTime);
-            cellDetails = this.scheduleObj.getCellDetails(task.StartTime);
+        if (a[i + 1].Importance === "Highly Important") {
+          B_importance = 4;
+        }
+        else if (a[i + 1].Importance === "Important") {
+          B_importance = 3;
+        }
+        else if (a[i + 1].Importance === "Regular") {
+          B_importance = 2;
+        }
+        else {
+          B_importance = 1;
+        }
+
+
+
+        // CHECK IF IMPORTANCE BETWEEN CURRENT ELEMENT AND NEXT ARE IN ORDER OR EQUAL
+        if (A_importance > B_importance || A_importance === B_importance){
+          //IF IN ORDER AND IS LAST INDEX COMPARISON, RETURN TRUE
+          if((i+1) === (a.length - 2)){
+            return true;
           }
+          // ELSE CONTINUE CHECK OF TASK ARRAY
+          else {
+            continue;
+          }
+        }
+        // IF COMPARISON OF IMPORTANCE FAILS, TASKS ARE NOT FULLY SORTED, RETURN FALSE
+        else {
+          return false;
+        }
+      }
+        return false;
+      } */ 
+
+    // Step 3: Loop through sorted tasks and swap StartTime and EndTime fields based on StartTime
+    /* for (let i = 0; i < sortedTasks.length - 1; i++) {
+      let minIndex = i;
+
+      for (let j = i + 1; j < sortedTasks.length; j++) {
+        if (sortedTasks[j].StartTime.getHours() < sortedTasks[minIndex].StartTime.getHours()) {
+          minIndex = j;
+        }
+      }
+
+      if (minIndex !== i) {
+        const tempStartTime = sortedTasks[i].StartTime;
+        const tempEndTime = sortedTasks[i].EndTime;
+
+        sortedTasks[i].StartTime = sortedTasks[minIndex].StartTime;
+        sortedTasks[i].EndTime = sortedTasks[minIndex].EndTime;
+
+        sortedTasks[minIndex].StartTime = tempStartTime;
+        sortedTasks[minIndex].EndTime = tempEndTime;
+      }
+    } */
+
+    //sortedTasks = tempTaskArray;
   
-          switch (task.importance) {
-            case 'Highly Important':
-              task.EndTime = new Date(task.StartTime.getTime() + 2 * 60 * 60 * 1000); // 2 hours
-              break;
-            case 'Important':
-              task.EndTime = new Date(task.StartTime.getTime() + 1 * 60 * 60 * 1000); // 1 hour
-              break;
-            case 'Regular':
-            default:
-              task.EndTime = new Date(task.StartTime.getTime() + 30 * 60 * 1000); // 30 minutes
-              break;
-          }
-
-
-          this.localData.push(event);
-        }); */
-
-    //var Start = new Date();
-    // var End = new Date(Start);
-
-
-    let newStart = new Date();
-    let newEnd = newStart;
-
     // Calculate free time and add tasks to the calendar
-    orderedTasks.forEach((task: any) => {
-      // Find free time slot here and update StartTime and EndTime
-      if (orderedTasks.indexOf(task) > 0) {
-        newStart = new Date(newEnd); // Set the new start time to the previous task's end time
-      }
-
-      // newEnd = new Date(newStart);
-
-      if (task.Importance === "Highly Important") {
-        newEnd.setHours(newEnd.getHours() + 3)
-      }
-      else if (task.Importance === "Important") {
-        newEnd.setHours(newEnd.getHours() + 2)
-      }
-      else if (task.Importance === "Regular") {
-        newEnd.setHours(newEnd.getHours() + 1)
-      }
-
+    sortedTasks.forEach((task: any) => {
+    
       // Find free time slot here and update StartTime and EndTime
       let event = {
         Id: this.localData.length + 1,
         Subject: task.Title,
-        StartTime: newStart,
-        EndTime: newEnd, //+ counter,
+        StartTime: task.StartTime,
+        EndTime: task.EndTime, //+ counter,
         IsAllDay: false,
         Importance: task.Importance,
-        RecurrenceRule: "",
-        Location: "",
-        Description: "",
+        RecurrenceRule: task.RecurrenceRule,
+        Location: task.Location,
+        Description: task.Description,
       };
+
+
+      /* if (event.Importance === "Highly Important") {
+        event.EndTime = event.StartTime.setHours(event.StartTime.getHours() + 1.5);
+      }
+      else if (event.Importance === "Important") {
+        event.EndTime = event.StartTime.setHours(event.StartTime.getHours() + 1);
+      }
+      else if (event.Importance === "Regular") {
+        event.EndTime = event.StartTime.setHours(event.StartTime.getHours() + 0.5);
+      } */
+
 
       this.localData.push(event);
     });
+
+
+
 
     // Clear pending tasks
     this.setState({ pendingTasksData: [] });
