@@ -17,6 +17,9 @@ import {
   RecurrenceEditorComponent,
 } from "@syncfusion/ej2-react-schedule";
 import { DataManager, WebApiAdaptor } from "@syncfusion/ej2-data";
+import * as dotenv from "dotenv";
+
+dotenv.config();
 
 import {
   TreeViewComponent,
@@ -34,9 +37,9 @@ import helper from "./support/helper"
 let varfoo = helper.greet("i imported my helper class with method")
 
 // Registering Syncfusion license key
-registerLicense(
-  "Mgo+DSMBaFt/QHRqVVhkVFpAaV5LQmFJfFBmRGlad1R1ckU3HVdTRHRcQl5hSX5SdU1mXnpdeHM=;Mgo+DSMBPh8sVXJ0S0J+XE9AflRGQmJAYVF2R2BJflRzfF9DZkwgOX1dQl9gSX1RdkViWndbd3FQRWc=;ORg4AjUWIQA/Gnt2VVhkQlFacldJWXxId0x0RWFab196d11MZVpBNQtUQF1hSn5QdEVjWHxWdXNQQGhb;MTM3NTE4MkAzMjMwMmUzNDJlMzBvTUVUMWwwN051Tlo0cUhQY1NMVG14bUY5b3ljODBMRFBYc2d1QW5QSmN3PQ==;MTM3NTE4M0AzMjMwMmUzNDJlMzBHOGFtb09tTzFTdmpUZ3U0RW5KakVwMWhNVVNkbERXYmVESkRpVzVJZGJvPQ==;NRAiBiAaIQQuGjN/V0Z+WE9EaFtKVmdWf1ppR2NbfE5xflZOallXVAciSV9jS31TdUdjWX5deHFSQGJVVg==;MTM3NTE4NUAzMjMwMmUzNDJlMzBGQTVRVmc4eENSakYrbi9ONlNtTDFNd0ZKOHBSQ2t5Si9rdHI3bjlsL0JNPQ==;MTM3NTE4NkAzMjMwMmUzNDJlMzBIQ3dsNUhqMVVHbHVIRmVEZ1JwWGRuOVlwZUZtYUlUbkZLaDhHT0VQRTVrPQ==;Mgo+DSMBMAY9C3t2VVhkQlFacldJWXxId0x0RWFab196d11MZVpBNQtUQF1hSn5QdEVjWHxWdXNSRmBb;MTM3NTE4OEAzMjMwMmUzNDJlMzBXSDc1ZW9BMnpwT0NveDhxVzdPMDhWKzlTMFRYNy9CUnl4QnYwM2F5ZkN3PQ==;MTM3NTE4OUAzMjMwMmUzNDJlMzBiT0F0VVh4K0RsdDFUZFAyL1hlamVOZ0dIcis4RW00eVBBa21wcXBYTURZPQ==;MTM3NTE5MEAzMjMwMmUzNDJlMzBGQTVRVmc4eENSakYrbi9ONlNtTDFNd0ZKOHBSQ2t5Si9rdHI3bjlsL0JNPQ=="
-);
+let license: string = process.env.MYLICENSE;
+registerLicense(license);
+
 type AppState = {
   newTaskTitle: string;
   tasks: { [key: string]: Object }[];
